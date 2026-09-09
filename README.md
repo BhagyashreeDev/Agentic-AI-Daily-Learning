@@ -159,6 +159,63 @@ Thank You   Diagnosis
               ↓
        Support Response
 ```
+# Day 4: Tweet Generator and Evaluation Workflow
+
+This project demonstrates an **LLM-based iterative workflow using LangGraph** to generate and improve tweets.
+
+### What it does
+
+The workflow:
+
+* Generates a tweet based on a given topic.
+* Evaluates the tweet for **humor, originality, punchiness, virality, and format**.
+* If improvement is needed, the tweet is rewritten using the evaluator's feedback.
+* Repeats the evaluation and improvement until the tweet is approved or the maximum number of iterations is reached.
+* Stores the tweet and feedback history.
+
+### Workflow
+
+```text
+Topic
+  ↓
+Generate Tweet
+  ↓
+Evaluate Tweet
+  ↓
+Approved? ───── Yes ───→ End
+  │
+  No
+  ↓
+Optimize Tweet
+  ↓
+Evaluate Again
+  ↺
+```
+# LangGraph Chatbot
+
+This project demonstrates a simple **chatbot using LangGraph and Google Gemini**.
+
+### What it does
+
+* Takes user messages as input.
+* Sends the conversation to the Gemini LLM.
+* Returns the AI response.
+* Maintains **conversation history** using LangGraph's `MemorySaver`.
+* Uses a `thread_id` to keep separate conversations.
+
+### Workflow
+
+```text
+User Message
+     ↓
+  Chat Node
+     ↓
+ Gemini LLM
+     ↓
+ AI Response
+     ↓
+ Conversation Memory
+```
 
 
 
