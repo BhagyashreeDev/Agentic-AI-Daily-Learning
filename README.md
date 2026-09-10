@@ -216,7 +216,83 @@ User Message
      ↓
  Conversation Memory
 ```
+# Day 5: LangGraph Joke Generator
 
+This project demonstrates a simple **LangGraph workflow** that generates a joke and then explains it using Google Gemini.
+
+### What it does
+
+* Takes a **topic** as input.
+* Generates a joke about the topic.
+* Generates an explanation for the joke.
+* Uses `InMemorySaver` to store workflow checkpoints.
+* Demonstrates **Time Travel** by going back to a previous checkpoint.
+* Demonstrates **Updating State** and continuing the workflow with the updated state.
+* Uses different `thread_id` values to maintain separate workflow histories.
+
+### Workflow
+
+```text
+Topic
+  ↓
+Generate Joke
+  ↓
+Generate Explanation
+  ↓
+End
+```
+
+### Main Concepts
+
+* **State** → Stores `topic`, `joke`, and `explanation`.
+* **Nodes** → `generate_joke` and `generate_explanation`.
+* **Checkpointing** → Saves the state at different points.
+* **Time Travel** → Allows going back to a previous checkpoint.
+* **Update State** → Changes the state at a checkpoint and continues the workflow.
+* **Thread ID** → Keeps separate workflow histories.
+
+# LangGraph Crash Recovery
+
+This project demonstrates how **LangGraph checkpoints workflow state** so that the current state can be inspected after a workflow is interrupted.
+
+### What it does
+
+* Creates a workflow with 3 steps.
+* Step 1 executes normally.
+* Step 2 intentionally waits for 30 seconds.
+* The workflow is manually interrupted during Step 2.
+* `InMemorySaver` stores checkpoints.
+* After interruption, the saved state and state history can be inspected.
+
+### Workflow
+
+```text
+START
+  ↓
+Step 1
+  ↓
+Step 2 (Hanging)
+  ↓
+Step 3
+  ↓
+END
+```
+
+### Main Concepts
+
+* **State** → Stores the workflow data.
+* **Nodes** → Each step is a separate function.
+* **Checkpointing** → Saves the workflow state.
+* **Interruption** → Workflow can be manually stopped.
+* **State Inspection** → `get_state()` checks the latest saved state.
+* **State History** → `get_state_history()` shows previous checkpoints.
+
+### Technologies
+
+* Python
+* LangGraph
+* TypedDict
+* InMemorySaver
 
 
 
