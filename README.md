@@ -277,22 +277,80 @@ Step 3
   ↓
 END
 ```
+# Day 6: LangGraph PDF RAG Chatbot
+
+This project demonstrates a **RAG (Retrieval-Augmented Generation) chatbot using LangGraph**.
+
+The chatbot uses *The Monk Who Sold His Ferrari* PDF as its knowledge source and retrieves relevant information when answering questions.
+
+### What it does
+
+* Loads the PDF document.
+* Splits the document into smaller chunks.
+* Creates embeddings using **HuggingFace Embeddings**.
+* Stores the chunks in a **FAISS vector database**.
+* Uses a RAG tool to retrieve relevant information from the PDF.
+* Uses **Google Gemini** to generate the final answer.
+* LangGraph decides when the retrieval tool should be used.
+
+### Workflow
+
+```text
+PDF
+ ↓
+Load Document
+ ↓
+Split into Chunks
+ ↓
+Create Embeddings
+ ↓
+FAISS Vector Store
+ ↓
+Retriever Tool
+ ↓
+LangGraph Chatbot
+ ↓
+Gemini LLM
+ ↓
+Answer
+```
+
+### LangGraph Flow
+
+```text
+User Question
+      ↓
+  Chat Node
+      ↓
+Need Information?
+   ↙       ↘
+ Yes        No
+ ↓           ↓
+RAG Tool   Final Answer
+ ↓
+Chat Node
+ ↓
+Final Answer
+```
 
 ### Main Concepts
 
-* **State** → Stores the workflow data.
-* **Nodes** → Each step is a separate function.
-* **Checkpointing** → Saves the workflow state.
-* **Interruption** → Workflow can be manually stopped.
-* **State Inspection** → `get_state()` checks the latest saved state.
-* **State History** → `get_state_history()` shows previous checkpoints.
+* **RAG** → Retrieves information from the PDF before generating an answer.
+* **Embeddings** → Converts document text into vectors.
+* **FAISS** → Stores and searches the vectors.
+* **Tool Calling** → Gemini can call the RAG tool when required.
+* **LangGraph** → Controls the chatbot and tool workflow.
 
 ### Technologies
 
 * Python
 * LangGraph
-* TypedDict
-* InMemorySaver
+* LangChain
+* Google Gemini
+* HuggingFace Embeddings
+* FAISS
+* PyPDF
+* Sentence Transformers
 
 
 
